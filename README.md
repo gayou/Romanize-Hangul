@@ -23,6 +23,7 @@ bakhaemin
 ## todo
 * テスト書いてない
 * 内部ロジック改善（10年以上前に作ったのであんまり覚えてない）
+* composer.jsonの記述改善
 　
  
 ## History
