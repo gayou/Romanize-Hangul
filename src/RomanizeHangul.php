@@ -6,7 +6,7 @@
  * ハングルのテキストを文化観光部2000年式のローマ字表記に変換する
  *
  * @author gayou
- * @version v0.2.0 2008/3/24 新規作成, 2009年頃 php5対応
+ * @version v0.3.0
  */
 class RomanizeHangul {
     
@@ -109,7 +109,7 @@ class RomanizeHangul {
         	$name_a = str_replace('ﾞ', '', $name_a);
         	$name_a = mb_convert_kana($name_a, 'KV');
             return $name_a.$personNameSeparate.implode('', $str);
-            
+
         } else {
             return implode('', $str);
         }
