@@ -1,0 +1,22 @@
+{
+    "name": "gayou/romanize-hangul",
+    "description": "Romanize-Hangul is a library that converts Hangul into Roman alphabet.",
+    "type": "library",
+    "license": "",
+    "authors": [
+        {
+            "name": "gayou",
+            "email": "gayou.ura@gmail.com"
+        }
+    ],
+    "require": {},
+    "repositories": {
+        "type": "git",
+        "url": "https://github.com/gayou/Romanize-Hangul.git"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gayou\\Romanize\\": "src/"
+        }
+    }
+}
