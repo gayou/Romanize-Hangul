@@ -18,7 +18,13 @@ echo $hangul->katakana($str, true).PHP_EOL;
 bakhaemin
 パク・ヘミン
 ```
-
+　
+ 
+## todo
+* テスト書いてない
+* 内部ロジック改善（10年以上前に作ったのであんまり覚えてない）
+　
+ 
 ## History
 * v0.1.0 Mar.24,2008 新規作成
 * v0.2.0 Sep.??,2009 php5対応
