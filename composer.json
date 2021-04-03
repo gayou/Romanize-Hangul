@@ -10,10 +10,6 @@
         }
     ],
     "require": {},
-    "repositories": {
-        "type": "git",
-        "url": "https://github.com/gayou/Romanize-Hangul.git"
-    },
     "autoload": {
         "psr-4": {
             "Gayou\\Romanize\\": "src/"
