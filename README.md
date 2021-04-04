@@ -19,14 +19,15 @@ bakhaemin
 パク・ヘミン
 ```
 　
- 
-## todo
+
+## Todo
 * テスト書いてない
 * 内部ロジック改善（10年以上前に作ったのであんまり覚えてない）
 * composer.jsonの記述改善
 　
- 
-## History
+　
+
+## Changelog
 * v0.1.0 Mar.24,2008 新規作成
 * v0.2.0 Sep.??,2009 php5対応
 * v0.3.0 Apr.03,2021 phpdocを書く, composer対応, メソッド名変更, githubに上げる
