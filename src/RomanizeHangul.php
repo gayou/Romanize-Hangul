@@ -8,7 +8,8 @@
  * @author gayou
  * @version v0.3.0
  */
-class RomanizeHangul {
+class RomanizeHangul
+{
     
     private $initial = array("g", "kk", "n", "d", "tt", "r", "m", "b", "pp", "s", "ss", "", "j", "jj", "ch", "k", "t", "p", "h");
     private $peak = array("a", "ae", "ya", "yae", "eo", "e", "yeo", "ye", "o", "wa", "wae", "oe", "yo", "u", "wo", "we", "wi", "yu", "eu", "ui", "i");
@@ -34,8 +35,8 @@ class RomanizeHangul {
             $ucs2 = hexdec($ucs2);
             if ($ucs2 >= 0xAC00 && $ucs2 <= 0xD7A3) {
                 $han = $ucs2 - 0xAC00;
-                $init = intval( $han / 21 / 28 );
-                $peak = intval( $han / 28 ) % 21;
+                $init = intval($han / 21 / 28);
+                $peak = intval($han / 28) % 21;
                 $fin  = $han % 28;
                 $tmpStr = $this->initial[$init].$this->peak[$peak].$this->final[$fin];
             } else {
@@ -47,33 +48,27 @@ class RomanizeHangul {
         
         //子音表記の調整
         $len = count($outStr);
-	    for ($i = 0 ; $i < $len-1 ; $i++ ) {
-	        $thisStr = $outStr[$i];
-	        $nextStr = $outStr[$i+1];
-	        $novowel = preg_match("/^[^aeouiwy]/", $nextStr);
-	        	
-	        if (preg_match("/(tt|pp|jj)$/", $thisStr) && $novowel ) {
-	            $outStr[$i] = preg_replace("/(tt|pp|jj)$/", "", $thisStr);
-	            
-	        } else if (preg_match("/([^n]g|kk)$/", $thisStr) && $novowel ) {
-	            $outStr[$i] = preg_replace("/(g|kk)$/", "k", $thisStr);
-	        
-	        } else if (preg_match("/(d|j|ch|s?s)$/", $thisStr) && $novowel ) {
-	            $outStr[$i] = preg_replace("/(d|j|ch|s?s)$/", "t", $thisStr);
-	        
-	        } else if (preg_match("/(b)$/", $thisStr) && $novowel ) {
-	            $outStr[$i] = preg_replace("/(b)$/", "p", $thisStr);
-	        
-	        } else if (preg_match("/(r)$/", $thisStr) && $novowel ) {
-	            $outStr[$i] = preg_replace("/(r)$/", "l", $thisStr);
-	            $outStr[$i+1] = preg_replace("/^r/", "l", $nextStr);
-	        }
-	    }
-        
-        
-        
+        for ($i = 0; $i < $len-1; $i++) {
+            $thisStr = $outStr[$i];
+            $nextStr = $outStr[$i+1];
+            $novowel = preg_match("/^[^aeouiwy]/", $nextStr);
+                
+            if (preg_match("/(tt|pp|jj)$/", $thisStr) && $novowel) {
+                $outStr[$i] = preg_replace("/(tt|pp|jj)$/", "", $thisStr);
+            } elseif (preg_match("/([^n]g|kk)$/", $thisStr) && $novowel) {
+                $outStr[$i] = preg_replace("/(g|kk)$/", "k", $thisStr);
+            } elseif (preg_match("/(d|j|ch|s?s)$/", $thisStr) && $novowel) {
+                $outStr[$i] = preg_replace("/(d|j|ch|s?s)$/", "t", $thisStr);
+            } elseif (preg_match("/(b)$/", $thisStr) && $novowel) {
+                $outStr[$i] = preg_replace("/(b)$/", "p", $thisStr);
+            } elseif (preg_match("/(r)$/", $thisStr) && $novowel) {
+                $outStr[$i] = preg_replace("/(r)$/", "l", $thisStr);
+                $outStr[$i+1] = preg_replace("/^r/", "l", $nextStr);
+            }
+        }
+
         $outStr = ($isarray)? $outStr: implode($separator, $outStr);
-        
+
         return ($isUcFirst && !$isarray)? ucfirst($outStr): $outStr;
     }
     
@@ -88,13 +83,15 @@ class RomanizeHangul {
      */
     public function katakana(string $str, bool $personName = false, string $personNameSeparate = '・') : string
     {
-    	//ハングルチェック
-    	mb_regex_encoding("UTF-8");
-    	if (!mb_ereg("[가-힣]+", $str)) return $str;
+        //ハングルチェック
+        mb_regex_encoding("UTF-8");
+        if (!mb_ereg("[가-힣]+", $str)) {
+            return $str;
+        }
         
         $hangul = $this->romanize($str, false, '', true);
         if ($personName) {
-        	$search = array_keys($this->kana4first);
+            $search = array_keys($this->kana4first);
             $replace = array_values($this->kana4first);
             $name_a = str_replace($search, $replace, array_shift($hangul));
             $hangul = array_merge(array($name_a), $hangul);
@@ -105,11 +102,10 @@ class RomanizeHangul {
         $str = str_replace($search, $replace, $hangul);
         
         if ($personName) {
-        	$name_a = mb_convert_kana(array_shift($str), 'k');
-        	$name_a = str_replace('ﾞ', '', $name_a);
-        	$name_a = mb_convert_kana($name_a, 'KV');
+            $name_a = mb_convert_kana(array_shift($str), 'k');
+            $name_a = str_replace('ﾞ', '', $name_a);
+            $name_a = mb_convert_kana($name_a, 'KV');
             return $name_a.$personNameSeparate.implode('', $str);
-
         } else {
             return implode('', $str);
         }
@@ -119,16 +115,16 @@ class RomanizeHangul {
         'jeo' => 'チョ',
         'gwo' => 'クォ',
     
-    	'geu' => 'ク',
+        'geu' => 'ク',
     
         'ga' => 'カ',
-    	'gi' => 'キ',
+        'gi' => 'キ',
         'ja' => 'チャ',
         'ji' => 'チ',
-    	'je' => 'チェ',
+        'je' => 'チェ',
         'jo' => 'チョ',
-    	
-    	'bo' => 'ポ'
+        
+        'bo' => 'ポ'
     );
 
     private $kana = array(
@@ -157,7 +153,7 @@ class RomanizeHangul {
         'heo' => 'ホ',
         
         'deu' => 'ドゥ',
-	    'deo' => 'ド',
+        'deo' => 'ド',
         'geu' => 'グ',
         'keu' => 'ク',
         'gye' => 'ケ',
@@ -173,8 +169,8 @@ class RomanizeHangul {
         
         'hya' => 'ヒャ',
         'hwa' => 'ファ',
-    	'hwi' => 'フィ',
-    	'hui' => 'フィ',
+        'hwi' => 'フィ',
+        'hui' => 'フィ',
         'hye' => 'ヘ',
         'hoe' => 'フェ',
         'hyo' => 'ヒョ',
@@ -199,7 +195,7 @@ class RomanizeHangul {
         
         //'ir' => 'イル',
         
-    	'eo' => 'オ',
+        'eo' => 'オ',
         'ka' => 'カ',
         'ko' => 'コ',
         
@@ -208,7 +204,7 @@ class RomanizeHangul {
         'sa' => 'サ',
         'si' => 'シ',
         'su' => 'ス',
-    	'se' => 'セ',
+        'se' => 'セ',
         'so' => 'ソ',
         
         'ga' => 'ガ',
@@ -248,7 +244,7 @@ class RomanizeHangul {
         
         'ma' => 'マ',
         'mi' => 'ミ',
-    	'mu' => 'ム',
+        'mu' => 'ム',
         'mo' => 'モ',
         
         'ya' => 'ヤ',
@@ -290,5 +286,4 @@ class RomanizeHangul {
         'g' => 'ク',
         'n' => 'ン'
     );
-    
 }
