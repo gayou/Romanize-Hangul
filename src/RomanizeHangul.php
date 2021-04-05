@@ -22,9 +22,9 @@ class RomanizeHangul
      * @param boolean $isUcFirst
      * @param string $separator
      * @param boolean $isarray
-     * @return string
+     * @return string|array
      */
-    public function romanize(string $str, bool $isUcFirst = false, string $separator = '', bool $isarray = false) : string
+    public function romanize(string $str, bool $isUcFirst = false, string $separator = '', bool $isarray = false) :string|array
     {
         $tmpStr = null;
         $outStr = array();
