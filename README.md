@@ -1,5 +1,12 @@
 # Romanize-Hangul
-Romanize-Hangul is a library that converts Hangul into Roman alphabet.
+Romanize-Hangulはハングルで書かれたテキストをローマ字表記に変換するライブラリです。
+
+PerlのLingua::KO::Romanize::Hangul ※1 というライブラリを参考に、  
+PHPに移植してカタカナ変換を追加したものです。（主として人名をカタカナ表記にするためのものです）
+
+※1  
+https://metacpan.org/pod/distribution/Lingua-KO-Romanize-Hangul/lib/Lingua/KO/Romanize/Hangul.pm
+
 
 ## Usage
 ### sample code
@@ -21,6 +28,8 @@ bakhaemin
 　
 
 ## Todo
+なにぶん10年以上前に作ったものなので以下の課題があります。
+
 * テスト書いてない
 * 内部ロジック改善（10年以上前に作ったのであんまり覚えてない）
 * composer.jsonの記述改善
