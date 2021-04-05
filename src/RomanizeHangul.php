@@ -21,9 +21,9 @@ class RomanizeHangul {
      * @param boolean $isUcFirst
      * @param string $separator
      * @param boolean $isarray
-     * @return void
+     * @return string
      */
-    public function romanize(string $str, bool $isUcFirst = false, string $separator = '', bool $isarray = false)
+    public function romanize(string $str, bool $isUcFirst = false, string $separator = '', bool $isarray = false) : string
     {
         $tmpStr = null;
         $outStr = array();
@@ -84,9 +84,9 @@ class RomanizeHangul {
      * @param string $str
      * @param boolean 人名をカタカナ表記にする場合はtrue
      * @param string 人名をカタカナ表記にする場合の姓と名の間の文字
-     * @return void
+     * @return string
      */
-    public function katakana(string $str, bool $personName = false, string $personNameSeparate = '・')
+    public function katakana(string $str, bool $personName = false, string $personNameSeparate = '・') : string
     {
     	//ハングルチェック
     	mb_regex_encoding("UTF-8");
