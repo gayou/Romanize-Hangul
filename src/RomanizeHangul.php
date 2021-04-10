@@ -20,11 +20,9 @@ class RomanizeHangul
      *
      * @param string $str
      * @param boolean $isUcFirst
-     * @param string $separator
-     * @param boolean $isarray
-     * @return string|array
+     * @return string
      */
-    public function romanize(string $str, bool $isUcFirst = false, string $separator = '', bool $isarray = false) :string|array
+    public function romanize(string $str, bool $isUcFirst = false) :string
     {
         $tmpStr = null;
         $outStr = array();
@@ -66,10 +64,9 @@ class RomanizeHangul
                 $outStr[$i+1] = preg_replace("/^r/", "l", $nextStr);
             }
         }
-
-        $outStr = ($isarray)? $outStr: implode($separator, $outStr);
-
-        return ($isUcFirst && !$isarray)? ucfirst($outStr): $outStr;
+        $outStr = implode('', $outStr);
+        
+        return ($isUcFirst)? ucfirst($outStr): $outStr;
     }
     
     
@@ -89,25 +86,33 @@ class RomanizeHangul
             return $str;
         }
         
-        $hangul = $this->romanize($str, false, '', true);
         if ($personName) {
+            //人名の場合
+            $lastName = mb_substr($str, 0, 1);
+            $firstName = mb_substr($str, 1);
+
+            //姓
+            $lastName = $this->romanize($lastName);
             $search = array_keys($this->kana4first);
             $replace = array_values($this->kana4first);
-            $name_a = str_replace($search, $replace, array_shift($hangul));
-            $hangul = array_merge(array($name_a), $hangul);
-        }
-        
-        $search = array_keys($this->kana);
-        $replace = array_values($this->kana);
-        $str = str_replace($search, $replace, $hangul);
-        
-        if ($personName) {
-            $name_a = mb_convert_kana(array_shift($str), 'k');
-            $name_a = str_replace('ﾞ', '', $name_a);
-            $name_a = mb_convert_kana($name_a, 'KV');
-            return $name_a.$personNameSeparate.implode('', $str);
+            $lastName = str_replace($search, $replace, $lastName);
+
+            $search = array_keys($this->kana);
+            $replace = array_values($this->kana);
+            $lastName = str_replace($search, $replace, $lastName);
+
+            //名
+            $firstName = $this->romanize($firstName);
+            $firstName = str_replace($search, $replace, $firstName);
+
+            return $lastName.$personNameSeparate.$firstName;
         } else {
-            return implode('', $str);
+            //人名以外の場合
+            $roman = $this->romanize($str);
+            $search = array_keys($this->kana);
+            $replace = array_values($this->kana);
+
+            return str_replace($search, $replace, $roman);
         }
     }
     
