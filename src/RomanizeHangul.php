@@ -202,6 +202,7 @@ class RomanizeHangul
         
         'eo' => 'オ',
         'ka' => 'カ',
+        'ki' => 'キ',
         'ko' => 'コ',
         
         'go' => 'ゴ',
