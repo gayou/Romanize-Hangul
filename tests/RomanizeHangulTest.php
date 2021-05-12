@@ -5,6 +5,20 @@ use Gayou\Romanize\RomanizeHangul;
 
 class RomanizeHangulTest extends TestCase
 {
+    public function testPersonNameBy권()
+    {
+        $hangul = new RomanizeHangul();
+
+        //Last Nameの場合は”クォン"
+        //クォン・フィドン
+        $this->assertSame($hangul->katakana('권희동', true), 'クォン・フィドン');
+
+        //First Nameの場合は"グォン"
+        //アン・グォンス
+        $this->assertSame($hangul->katakana('안권수', true), 'アン・グォンス');
+    }
+    
+
     public function testPersonNameByLee()
     {
         $hangul = new RomanizeHangul();

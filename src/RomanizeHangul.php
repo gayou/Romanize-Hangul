@@ -181,7 +181,7 @@ class RomanizeHangul
         'hyo' => 'ヒョ',
         'gwa' => 'グァ',
         'gwi' => 'ギィ',
-        'gwo' => 'クォ',
+        'gwo' => 'グォ',
         
         'cha' => 'チャ',
         'chu' => 'チュ',
