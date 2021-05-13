@@ -17,7 +17,20 @@ class RomanizeHangulTest extends TestCase
         //アン・グォンス
         $this->assertSame($hangul->katakana('안권수', true), 'アン・グォンス');
     }
-    
+
+
+    public function testPersonNameBy주()
+    {
+        $hangul = new RomanizeHangul();
+        
+        //Last Nameの場合は”チュ"
+        $this->assertSame($hangul->katakana('주권', true), 'チュ・グォン');
+
+        //First Nameの場合は"ジュ"
+        $this->assertSame($hangul->katakana('정주현', true), 'チョン・ジュヒョン');
+        $this->assertSame($hangul->katakana('이학주', true), 'イ・ハクジュ');
+    }
+
 
     public function testPersonNameByLee()
     {
