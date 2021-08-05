@@ -124,6 +124,7 @@ class RomanizeHangul
     
         'ga' => 'カ',
         'gi' => 'キ',
+        'go' => 'コ',
         'ja' => 'チャ',
         'ji' => 'チ',
         'ju' => 'チュ',
