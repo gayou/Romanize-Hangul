@@ -124,6 +124,7 @@ class RomanizeHangul
     
         'ga' => 'カ',
         'gi' => 'キ',
+        'gu' => 'ク',
         'go' => 'コ',
         'ja' => 'チャ',
         'ji' => 'チ',
@@ -135,8 +136,10 @@ class RomanizeHangul
     );
 
     private $kana = array(
-        'ng' => 'ン',
-        
+        'ngu'   => 'ング',
+
+        'ng'   => 'ン',
+
         'keur' => 'ク',
         
         'hyeo' => 'ヒョ',
@@ -207,8 +210,6 @@ class RomanizeHangul
         'ki' => 'キ',
         'ko' => 'コ',
         
-        'go' => 'ゴ',
-        
         'sa' => 'サ',
         'si' => 'シ',
         'su' => 'ス',
@@ -217,7 +218,9 @@ class RomanizeHangul
         
         'ga' => 'ガ',
         'gi' => 'ギ',
-        'gu' => 'ク',
+        'gu' => 'グ',
+        'go' => 'ゴ',
+
         'ja' => 'ジャ',
         'ji' => 'ジ',
         'ju' => 'ジュ',
