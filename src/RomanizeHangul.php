@@ -6,7 +6,7 @@
  * ハングルのテキストを文化観光部2000年式のローマ字表記に変換する
  *
  * @author gayou
- * @version v0.4.3
+ * @version v0.4.5
  */
 class RomanizeHangul
 {
@@ -180,7 +180,7 @@ class RomanizeHangul
         'hya' => 'ヒャ',
         'hwa' => 'ファ',
         'hwi' => 'フィ',
-        'hui' => 'フィ',
+        'hui' => 'ヒ',
         'hye' => 'ヘ',
         'hoe' => 'フェ',
         'hyo' => 'ヒョ',
