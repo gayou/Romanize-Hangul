@@ -180,7 +180,7 @@ class RomanizeHangul
         'hya' => 'ヒャ',
         'hwa' => 'ファ',
         'hwi' => 'フィ',
-        'hui' => 'フィ',
+        'hui' => 'ヒ',
         'hye' => 'ヘ',
         'hoe' => 'フェ',
         'hyo' => 'ヒョ',
