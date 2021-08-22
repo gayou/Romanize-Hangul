@@ -6,7 +6,7 @@
  * ハングルのテキストを文化観光部2000年式のローマ字表記に変換する
  *
  * @author gayou
- * @version v0.4.5
+ * @version 0.4.6
  */
 class RomanizeHangul
 {
@@ -131,6 +131,8 @@ class RomanizeHangul
         'ju' => 'チュ',
         'je' => 'チェ',
         'jo' => 'チョ',
+
+        'do' => 'ト',
         
         'bo' => 'ポ'
     );
