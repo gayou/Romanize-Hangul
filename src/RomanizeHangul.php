@@ -221,6 +221,7 @@ class RomanizeHangul
         'ga' => 'ガ',
         'gi' => 'ギ',
         'gu' => 'グ',
+        'ge' => 'ケ',
         'go' => 'ゴ',
 
         'ja' => 'ジャ',
