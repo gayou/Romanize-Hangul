@@ -6,7 +6,7 @@
  * ハングルのテキストを文化観光部2000年式のローマ字表記に変換する
  *
  * @author gayou
- * @version 0.4.6
+ * @version 0.4.7
  */
 class RomanizeHangul
 {
@@ -221,6 +221,7 @@ class RomanizeHangul
         'ga' => 'ガ',
         'gi' => 'ギ',
         'gu' => 'グ',
+        'ge' => 'ケ',
         'go' => 'ゴ',
 
         'ja' => 'ジャ',
