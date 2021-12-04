@@ -89,7 +89,7 @@ class RomanizeHangul
         if ($personName) {
             //人名の場合
             $lastName = mb_substr($str, 0, 1);
-            $firstName = mb_substr($str, 1);
+            $firstNames = mb_str_split(mb_substr($str, 1));
 
             //姓
             $lastName = $this->romanize($lastName);
@@ -102,10 +102,14 @@ class RomanizeHangul
             $lastName = str_replace($search, $replace, $lastName);
 
             //名
-            $firstName = $this->romanize($firstName);
-            $firstName = str_replace($search, $replace, $firstName);
+            $firstName = '';
+            foreach ($firstNames as $name) {
+                $name = $this->romanize($name);
+                $firstName .= str_replace($search, $replace, $name);
+            }
 
             return $lastName.$personNameSeparate.$firstName;
+            
         } else {
             //人名以外の場合
             $roman = $this->romanize($str);
@@ -138,12 +142,8 @@ class RomanizeHangul
     );
 
     private $kana = array(
-        'ngu'   => 'ング',
-
-        'ng'   => 'ン',
-
         'keur' => 'ク',
-        
+
         'hyeo' => 'ヒョ',
         'myeo' => 'ミョ',
         'nyeo' => 'ニョ',
@@ -154,7 +154,9 @@ class RomanizeHangul
         'chae' => 'チェ',
         'choe' => 'チェ',
         'ryeo' => 'リョ',
-        
+
+        'ngu'   => 'ング',
+                        
         'dae' => 'デ',
         'jae' => 'ジェ',
         'jeo' => 'ジョ',
@@ -177,7 +179,6 @@ class RomanizeHangul
         'peu' => 'プ',
         'reu' => 'ル',
         'teu' => 'トゥ',
-        'eu'  => 'ウ',
         
         'hya' => 'ヒャ',
         'hwa' => 'ファ',
@@ -206,7 +207,8 @@ class RomanizeHangul
         'ryu' => 'リュ',
         
         //'ir' => 'イル',
-        
+
+        'eu' => 'ウ',
         'eo' => 'オ',
         'ka' => 'カ',
         'ki' => 'キ',
@@ -283,7 +285,9 @@ class RomanizeHangul
         'no' => 'ノ',
 
         'ye' => 'イェ',
-        
+
+        'ng'   => 'ン',
+       
         'm' => 'ム',
     
         'a' => 'ア',
