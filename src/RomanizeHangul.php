@@ -206,8 +206,6 @@ class RomanizeHangul
         'pyo' => 'ピョ',
         'ryu' => 'リュ',
         
-        //'ir' => 'イル',
-
         'eu' => 'ウ',
         'eo' => 'オ',
         'ka' => 'カ',
@@ -277,7 +275,6 @@ class RomanizeHangul
         'wa' => 'ワ',
         'wo' => 'ウォ',
         
-        
         'na' => 'ナ',
         'ni' => 'ニ',
         're' => 'レ',
@@ -285,6 +282,7 @@ class RomanizeHangul
         'no' => 'ノ',
 
         'ye' => 'イェ',
+        'ui' => 'ウィ',
 
         'ng'   => 'ン',
        
