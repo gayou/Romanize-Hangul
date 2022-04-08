@@ -1,6 +1,6 @@
 {
     "name": "gayou/romanize-hangul",
-    "description": "Romanize-Hangul is a library that converts Hangul into Roman alphabet.",
+    "description": "Romanize-Hangul is a library that converts Hangul into Roman alphabet and Japanese katakana.",
     "type": "library",
     "license": "",
     "authors": [

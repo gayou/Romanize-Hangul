@@ -13,6 +13,19 @@ class RomanizeHangulTest extends TestCase
     }
 
 
+    public function testLoadMapping()
+    {
+        //iniファイルを読み込んで、$config['katakana']['no`]が存在するかをチェック
+        //  ->予約語エラー回避のため「 no=ノ」 のように先頭に半角スペースを入れている
+        //  ->$configはlocal変数なので、代わりに$searchに'no'が含まれていればOKとする
+        $reflection = new \ReflectionClass(self::$hangul);
+        $property = $reflection->getProperty('search');
+        $property->setAccessible(true);
+        $result = $property->getValue(self::$hangul);
+        $this->assertTrue(in_array('no', $result));;
+    }
+
+
     public function testPersonNameBy권()
     {
         //Last Nameの場合は”クォン"
@@ -146,5 +159,12 @@ class RomanizeHangulTest extends TestCase
     {
         //ソン・チャンウィ
         $this->assertSame(self::$hangul->katakana('송찬의', true), 'ソン・チャンウィ');
+    }
+
+
+    public function testPersonNameBy노()
+    {
+        //ノ・ギョンウン
+        $this->assertSame(self::$hangul->katakana('노경은', true), 'ノ・ギョンウン');
     }
 }

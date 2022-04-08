@@ -2,7 +2,7 @@
 Romanize-Hangulはハングルで書かれたテキストをローマ字表記に変換するライブラリです。
 
 [Lingua::KO::Romanize::Hangul](https://metacpan.org/pod/distribution/Lingua-KO-Romanize-Hangul/lib/Lingua/KO/Romanize/Hangul.pm) というPerlのライブラリを参考に、  
-PHPに移植してカタカナ変換を追加したもので、主として人名をカタカナ表記にするために利用できます。
+PHPに移植してカタカナ変換を追加したもので、主に人名をカタカナ表記にするために利用できます。
 
 ## Usage
 ### sample code
@@ -23,7 +23,10 @@ bakhaemin
 ```
 
 ## Changelog
-* v0.1.0 Mar.24,2008 新規作成
-* v0.2.0 Sep.??,2009 php5対応
-* v0.3.0 Apr.03,2021 phpdocを書く, composer対応, メソッド名変更, githubに上げる
-* v0.4.x Apr.11,2021〜 既存バグの修正,ユニットテスト追加を取り組み中
+| ver | 日付 | 更新内容 |
+| --- | --- | ------- |
+| 0.1.0 | Mar 24,2008 | 新規作成 |
+| 0.2.0 | Sep ?,2009 | php5対応 |
+| 0.3.0 | Apr 3,2021 | phpdoc記載, composer対応, メソッド名変更, githubでバージョン管理 |
+| 0.4.x | Apr 11,2021- | カナ変換バグの修正, ユニットテスト追加 |
+| 0.5.0 | Apr 8,2022 | カナ変換のマッピングを外部ファイル定義に移行 |

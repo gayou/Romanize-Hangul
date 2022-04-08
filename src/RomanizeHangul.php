@@ -6,15 +6,55 @@
  * ハングルのテキストを文化観光部2000年式のローマ字表記に変換する
  *
  * @author gayou
- * @version 0.4.8
+ * @version 0.5.0
  */
 class RomanizeHangul
 {
-    
+    private const MAPPING_PATH = __DIR__.'/../config/mapping.ini';
+
     private $initial = array("g", "kk", "n", "d", "tt", "r", "m", "b", "pp", "s", "ss", "", "j", "jj", "ch", "k", "t", "p", "h");
     private $peak = array("a", "ae", "ya", "yae", "eo", "e", "yeo", "ye", "o", "wa", "wae", "oe", "yo", "u", "wo", "we", "wi", "yu", "eu", "ui", "i");
     private $final = array("", "g", "kk", "ks", "n", "nj", "nh", "d", "r", "lg", "lm", "lb", "ls", "lt", "lp", "lh", "m", "b", "ps", "s", "ss", "ng", "j", "c", "k", "t", "p", "h");
     
+    private $search;
+    private $replace;
+
+    private $searchFirstName;
+    private $replaceFirstName;
+
+    /**
+     * コンストラクタ
+     *
+     * @param string $str
+     * @param boolean $isUcFirst
+     * @return string
+     */
+    public function __construct()
+    {
+        //マッピングファイル読み込み
+        $config = $this->loadMappping();
+
+        $this->search  = array_keys($config['katakana']);
+        $this->replace = array_values($config['katakana']);
+
+        $this->searchFirstName = array_keys(array_merge($config['katakana'], $config['firstname']));
+        $this->replaceFirstName = array_values(array_merge($config['katakana'], $config['firstname']));
+    }
+
+    
+    /**
+     * マッピングファイルを読み込む
+     *
+     * @param string $filepath
+     * @return array
+     */
+    private function loadMappping(string $filepath = self::MAPPING_PATH) : array
+    {
+        // $config = parse_ini_file($filepath, true, INI_SCANNER_TYPED);
+        return parse_ini_file($filepath, true, INI_SCANNER_RAW);
+    }
+
+
     /**
      * ハングルをローマ字表記に変換
      *
@@ -87,219 +127,27 @@ class RomanizeHangul
         }
         
         if ($personName) {
-            //人名の場合
+            //姓・名 分割
             $lastName = mb_substr($str, 0, 1);
             $firstNames = mb_str_split(mb_substr($str, 1));
 
             //姓
             $lastName = $this->romanize($lastName);
-            $search = array_keys($this->kana4first);
-            $replace = array_values($this->kana4first);
-            $lastName = str_replace($search, $replace, $lastName);
-
-            $search = array_keys($this->kana);
-            $replace = array_values($this->kana);
-            $lastName = str_replace($search, $replace, $lastName);
+            $lastName = str_replace($this->searchFirstName, $this->replaceFirstName, $lastName);
 
             //名
             $firstName = '';
             foreach ($firstNames as $name) {
                 $name = $this->romanize($name);
-                $firstName .= str_replace($search, $replace, $name);
+                $firstName .= str_replace($this->search, $this->replace, $name);
             }
 
             return $lastName.$personNameSeparate.$firstName;
-            
         } else {
             //人名以外の場合
             $roman = $this->romanize($str);
-            $search = array_keys($this->kana);
-            $replace = array_values($this->kana);
 
-            return str_replace($search, $replace, $roman);
+            return str_replace($this->search, $this->replace, $roman);
         }
     }
-    
-    private $kana4first = array(
-        'jeo' => 'チョ',
-        'gwo' => 'クォ',
-    
-        'geu' => 'ク',
-    
-        'ga' => 'カ',
-        'gi' => 'キ',
-        'gu' => 'ク',
-        'go' => 'コ',
-        'ja' => 'チャ',
-        'ji' => 'チ',
-        'ju' => 'チュ',
-        'je' => 'チェ',
-        'jo' => 'チョ',
-
-        'do' => 'ト',
-        
-        'bo' => 'ポ'
-    );
-
-    private $kana = array(
-        'keur' => 'ク',
-
-        'hyeo' => 'ヒョ',
-        'myeo' => 'ミョ',
-        'nyeo' => 'ニョ',
-        'gyeo' => 'ギョ',
-        'cheo' => 'チョ',
-        'byeo' => 'ビョ',
-        'pyeo' => 'ピョ',
-        'chae' => 'チェ',
-        'choe' => 'チェ',
-        'ryeo' => 'リョ',
-
-        'ngu'   => 'ング',
-                        
-        'dae' => 'デ',
-        'jae' => 'ジェ',
-        'jeo' => 'ジョ',
-        'yeo' => 'ヨ',
-        'geo' => 'ゴ',
-        'seo' => 'ソ',
-        'beo' => 'ボ',
-        'heo' => 'ホ',
-        
-        'deu' => 'ドゥ',
-        'deo' => 'ド',
-        'geu' => 'グ',
-        'keu' => 'ク',
-        'gye' => 'ケ',
-        'sae' => 'セ',
-        'seu' => 'ス',
-        'jeu' => 'ジュ',
-        'heu' => 'フ',
-        'beu' => 'ブ',
-        'peu' => 'プ',
-        'reu' => 'ル',
-        'teu' => 'トゥ',
-        
-        'hya' => 'ヒャ',
-        'hwa' => 'ファ',
-        'hwi' => 'フィ',
-        'hui' => 'ヒ',
-        'hye' => 'ヘ',
-        'hoe' => 'フェ',
-        'hyo' => 'ヒョ',
-        'gwa' => 'グァ',
-        'gwi' => 'ギィ',
-        'gwo' => 'グォ',
-        
-        'cha' => 'チャ',
-        'chu' => 'チュ',
-        'gyu' => 'ギュ',
-        
-        'bae' => 'ペ',
-        'pae' => 'ペ',
-        'peo' => 'ポ',
-        'tae' => 'テ',
-        'hae' => 'ヘ',
-        'mae' => 'メ',
-        'teo' => 'ト',
-        
-        'pyo' => 'ピョ',
-        'ryu' => 'リュ',
-        
-        'eu' => 'ウ',
-        'eo' => 'オ',
-        'ka' => 'カ',
-        'ki' => 'キ',
-        'ko' => 'コ',
-        
-        'sa' => 'サ',
-        'si' => 'シ',
-        'su' => 'ス',
-        'se' => 'セ',
-        'so' => 'ソ',
-        
-        'ga' => 'ガ',
-        'gi' => 'ギ',
-        'gu' => 'グ',
-        'ge' => 'ケ',
-        'go' => 'ゴ',
-
-        'ja' => 'ジャ',
-        'ji' => 'ジ',
-        'ju' => 'ジュ',
-        'jo' => 'チョ',
-        'je' => 'ジェ',
-        
-        'ta' => 'タ',
-        'chi' => 'チ',
-        'to' => 'トー',
-        'da' => 'ダ',
-        'du' => 'ドゥ',
-        'de' => 'デ',
-        'di' => 'ディ',
-        'do' => 'ド',
-        'tu' => 'トゥ',
-        
-        'pa' => 'ファ',
-        'ba' => 'パ',
-        'bi' => 'ビ',
-        'pi' => 'ピ',
-        'pu' => 'プ',
-        'pe' => 'ペ',
-        'be' => 'ペ',
-        'bo' => 'ボ',
-        'po' => 'ポ',
-        
-        'ha' => 'ハ',
-        'hi' => 'ヒ',
-        'hu' => 'フ',
-        'he' => 'ヘ',
-        'ho' => 'ホ',
-        
-        'ma' => 'マ',
-        'mi' => 'ミ',
-        'mu' => 'ム',
-        'mo' => 'モ',
-        
-        'ya' => 'ヤ',
-        'yu' => 'ユ',
-        'yo' => 'ヨ',
-        'ye' => 'イェ',
-        
-        'ra' => 'ラ',
-        'ri' => 'リ',
-        'ru' => 'ルー',
-        'ro' => 'ロ',
-        'lo' => 'ロ',
-        
-        'wa' => 'ワ',
-        'wo' => 'ウォ',
-        
-        'na' => 'ナ',
-        'ni' => 'ニ',
-        're' => 'レ',
-        'ne' => 'ネ',
-        'no' => 'ノ',
-
-        'ye' => 'イェ',
-        'ui' => 'ウィ',
-
-        'ng'   => 'ン',
-       
-        'm' => 'ム',
-    
-        'a' => 'ア',
-        'i' => 'イ',
-        'u' => 'ウ',
-        'o' => 'オ',
-        
-        's' => 'ス',
-        't' => 'ト',
-        'b' => 'プ',
-        'r' => 'ル',
-        'l' => 'ル',
-        'k' => 'ク',
-        'g' => 'ク',
-        'n' => 'ン'
-    );
 }
