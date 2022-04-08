@@ -10,7 +10,7 @@
  */
 class RomanizeHangul
 {
-    private const MAPPING_PATH = 'config/mapping.ini';
+    private const MAPPING_PATH = __DIR__.'/../config/mapping.ini';
 
     private $initial = array("g", "kk", "n", "d", "tt", "r", "m", "b", "pp", "s", "ss", "", "j", "jj", "ch", "k", "t", "p", "h");
     private $peak = array("a", "ae", "ya", "yae", "eo", "e", "yeo", "ye", "o", "wa", "wae", "oe", "yo", "u", "wo", "we", "wi", "yu", "eu", "ui", "i");
