@@ -167,4 +167,11 @@ class RomanizeHangulTest extends TestCase
         //ノ・ギョンウン
         $this->assertSame(self::$hangul->katakana('노경은', true), 'ノ・ギョンウン');
     }
+
+
+    public function testPersonNameBy위()
+    {
+        //ウィ・ジェミン
+        $this->assertSame(self::$hangul->katakana('위재민', true), 'ウィ・ジェミン');
+    }
 }
